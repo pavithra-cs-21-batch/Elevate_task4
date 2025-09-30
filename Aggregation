@@ -1,0 +1,29 @@
+Task 4: Aggregate Functions and Grouping
+1. COUNT() → Total number of bookings
+SELECT COUNT(*) AS TotalBookings
+FROM Booking;
+
+2. SUM() → Total revenue collected
+SELECT SUM(Amount) AS TotalRevenue
+FROM Payment;
+
+3. AVG() → Average payment amount
+SELECT AVG(Amount) AS AveragePayment
+FROM Payment;
+
+4. GROUP BY → Total revenue per payment mode
+SELECT PaymentMode, SUM(Amount) AS TotalAmount
+FROM Payment
+GROUP BY PaymentMode;
+
+5. GROUP BY with COUNT → Number of bookings per vehicle
+SELECT VehicleID, COUNT(*) AS NumberOfBookings
+FROM Booking
+GROUP BY VehicleID;
+
+6. GROUP BY with multiple columns → Revenue per vehicle
+SELECT V.OwnerName, V.VehicleNumber, SUM(P.Amount) AS TotalPaid
+FROM Vehicle V
+INNER JOIN Booking B ON V.VehicleID = B.VehicleID
+INNER JOIN Payment P ON B.BookingID = P.BookingID
+GROUP BY V.OwnerName, V.VehicleNumber;
